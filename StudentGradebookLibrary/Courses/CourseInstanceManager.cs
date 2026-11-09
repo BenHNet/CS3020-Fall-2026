@@ -1,3 +1,5 @@
+#nullable enable
+
 using System;
 using System.Collections.Generic;
 
@@ -5,12 +7,21 @@ namespace StudentGradebookLibrary.Courses
 {
     internal class CourseInstanceManager
     {
+        private string Course { get; set; }
+
         private readonly List<CourseInstance> _courseInstances = new();
+
+        public CourseInstanceManager(string course)
+        {
+            Course = course;
+        }
 
         // Schedule an instance of an existing course.
         public CourseInstance Create(Guid courseId, Semester semester, int year)
         {
-            var instance = new CourseInstance(Guid.NewGuid(), courseId, semester, year);
+            var instance = new CourseInstance(
+                Guid.NewGuid(), courseId, semester, year);
+
             _courseInstances.Add(instance);
             return instance;
         }
