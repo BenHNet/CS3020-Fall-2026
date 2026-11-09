@@ -10,7 +10,7 @@ namespace StudentGradebookLibrary
         private static readonly JsonSerializerOptions _options =
             new JsonSerializerOptions { WriteIndented = true };
 
-        public JsonRepo(string folder = "studentData")
+        public JsonRepo(string folder = "GradebookData")
         {
             _folder = folder;
 
