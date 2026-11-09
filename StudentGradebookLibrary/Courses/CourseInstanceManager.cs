@@ -45,5 +45,20 @@ namespace StudentGradebookLibrary.Courses
             var instance = Get(courseInstanceId);
             return instance != null && _courseInstances.Remove(instance);
         }
+
+        // Update the semester and year of an existing course instance.
+        public void Update(Guid courseInstanceID, Semester semester, int year)
+        {
+            var instance = Get(courseInstanceID);
+
+            if (instance == null)
+            {
+                return;
+            }
+
+            instance.CourseTerm = semester;
+            instance.CourseYear = year;
+
+        }
     }
 }
