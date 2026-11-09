@@ -7,29 +7,16 @@ using System.IO;
 
 namespace StudentGradebookLibrary
 {
-    // Interface for StudentManager class
-    public interface IStudentManager
-    {
-        // Interface methods for StudentManager class
-
-        void Create(string name);
-        void Get();
-        void DisplayAllStudents();
-
-        void Delete(Student student);
-        void Update(Student student);
-
-     
-    }
 
     // StudentManager class implements the iStudentManager interface
     public class StudentManager : IStudentManager
     {
-        List<Student> Students;
+        private List<Student> Students;
 
-        public StudentManager(List<Student> students)
+        public StudentManager()
         {
-           this.Students = students;
+
+           this.Students = GetAll();
         }
 
         // Implement Methods from iStudentManager interface below
@@ -70,9 +57,9 @@ namespace StudentGradebookLibrary
             }
         }
 
-        public void DisplayAllStudents()
+        public List<Student> GetAll()
         {
-            
+            return Students;
         }
 
         public void Delete(Student student)
