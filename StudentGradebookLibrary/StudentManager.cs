@@ -26,7 +26,7 @@ namespace StudentGradebookLibrary
         }
 
         // Implement Methods from IStudentManager interface below
-        public void Create(Student student)
+        public void Create(IStudent student)
         {
             if (student == null)
             {

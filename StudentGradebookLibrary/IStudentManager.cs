@@ -6,7 +6,7 @@ namespace StudentGradebookLibrary
     // Interface for StudentManager class
     public interface IStudentManager
     {
-        void Create(Student student);
+        void Create(IStudent student);
 
         Student Get(Guid studentId);
 
