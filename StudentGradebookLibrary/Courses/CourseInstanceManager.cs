@@ -7,13 +7,11 @@ namespace StudentGradebookLibrary.Courses
 {
     internal class CourseInstanceManager
     {
-        private string Course { get; set; }
-
         private readonly List<CourseInstance> _courseInstances = new();
 
-        public CourseInstanceManager(string course)
+        public CourseInstanceManager()
         {
-            Course = course;
+            _courseInstances = GetList();
         }
 
         // Schedule an instance of an existing course.

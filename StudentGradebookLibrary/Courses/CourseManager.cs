@@ -51,6 +51,24 @@ namespace StudentGradebookLibrary
             return this.Courses;
         }
 
+        public Course Get(Guid courseID)
+        {
+            return this.Courses.Find(course => course.CourseID == courseID);
+        }
+
+        public void Update(Guid courseID, string title, string description)
+        {
+            var course = Get(courseID);
+
+            if (course == null)
+            {
+                return;
+            }
+
+            course.Title = title;
+            course.Description = description;
+        }
+
         public void Delete(int index)
         {
             if (index < 1 || index > this.Courses.Count)
