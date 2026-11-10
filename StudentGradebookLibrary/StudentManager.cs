@@ -1,34 +1,38 @@
+
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.IO;
-
-
+using System.Linq;
+using System.Text.Json;
 
 namespace StudentGradebookLibrary
 {
-
-    // StudentManager class implements the iStudentManager interface
+    // StudentManager class implements the IStudentManager interface
     public class StudentManager : IStudentManager
     {
         private List<Student> Students;
 
         public StudentManager()
         {
+            Students = new List<Student>();
 
-           this.Students = GetAll();
+            if (File.Exists("gradebook.json"))
+            {
+                string json = File.ReadAllText("gradebook.json");
+
+                Students = JsonSerializer.Deserialize<List<Student>>(json)
+                           ?? new List<Student>();
+            }
         }
 
-        // Implement Methods from iStudentManager interface below
-        public void Create(string name)
+        // Implement Methods from IStudentManager interface below
+        public void Create(Student student)
         {
-            if (string.IsNullOrWhiteSpace(name))
+            if (student == null)
             {
-                Console.WriteLine("Name cannot be empty!");
+                Console.WriteLine("Student cannot be null!");
                 return;
             }
-
-            Student student = new Student(name);
 
             Students.Add(student);
 
@@ -42,19 +46,9 @@ namespace StudentGradebookLibrary
             Console.WriteLine("Student created successfully.");
         }
 
-        public void Get()
+        public Student Get(Guid studentId)
         {
-            if (File.Exists("gradebook.json"))
-            {
-                string json = File.ReadAllText("gradebook.json");
-
-                Students = JsonSerializer.Deserialize<List<Student>>(json)
-                           ?? new List<Student>();
-            }
-            else
-            {
-                Students = new List<Student>();
-            }
+            return Students.FirstOrDefault(s => s.StudentId == studentId);
         }
 
         public List<Student> GetAll()
@@ -62,10 +56,11 @@ namespace StudentGradebookLibrary
             return Students;
         }
 
-        public void Delete(Student student)
+        public void Delete(Guid studentId)
         {
-            // Find a student with a matching name
-            int replacementIndex = Students.FindIndex(s => s.Name == student.Name);
+            int replacementIndex = Students.FindIndex(
+                s => s.StudentId == studentId
+            );
 
             if (replacementIndex != -1)
             {
@@ -84,29 +79,9 @@ namespace StudentGradebookLibrary
             }
         }
 
-        public void Update(Student student)
+        public void Update(Guid studentId)
         {
-            // Find a student with a matching name
-            int replacementIndex = Students.FindIndex(s => s.Name == student.Name);
-
-            // If the index has been found, replace that element with new student
-            if (replacementIndex != -1)
-            {
-                Students[replacementIndex] = student;
-
-                string json = JsonSerializer.Serialize(
-                    Students,
-                    new JsonSerializerOptions { WriteIndented = true }
-                );
-
-                File.WriteAllText("gradebook.json", json);
-            }
-            else
-            {
-                Console.WriteLine("Student not found.");
-            }
+            // Update implementation requires replacement student information.
         }
-
-
     }
 }

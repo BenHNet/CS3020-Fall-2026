@@ -1,9 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
-using System.IO;
-
-
 
 namespace StudentGradebookLibrary
 {
@@ -12,14 +8,12 @@ namespace StudentGradebookLibrary
     {
         void Create(Student student);
 
-        public Student Get(Guid StudentId);
+        Student Get(Guid studentId);
 
-        public List<Student> GetAll();
+        List<Student> GetAll();
 
-        void Delete(Guid StudentId);
+        void Delete(Guid studentId);
 
-        void Update(Guid StudentId);
-
-     
+        void Update(Guid studentId);
     }
 }
