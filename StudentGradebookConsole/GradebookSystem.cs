@@ -43,7 +43,7 @@ namespace StudentGradebookConsole
 
         private SystemOperations SelectOperation()
         {
-            Console.WriteLine("\n------- Gradebook System -------");
+            Console.WriteLine("------- Gradebook System -------");
             Console.WriteLine("1 - Add student");
             Console.WriteLine("2 - Add grade");
             Console.WriteLine("3 - View all students");
@@ -51,7 +51,7 @@ namespace StudentGradebookConsole
 
             while (true)
             {
-                Console.Write("\nselect operation: ");
+                Console.Write("\nSelect operation: ");
                 string choice = Console.ReadLine();
 
                 switch (choice)
