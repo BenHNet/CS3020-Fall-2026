@@ -1,9 +1,10 @@
 #nullable enable
 
+using StudentGradebookLibrary.Models;
 using System;
 using System.Collections.Generic;
 
-namespace StudentGradebookLibrary.Courses
+namespace StudentGradebookLibrary.Managers
 {
     internal class CourseInstanceManager
     {

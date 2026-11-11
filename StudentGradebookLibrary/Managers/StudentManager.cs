@@ -1,28 +1,20 @@
-
+using StudentGradebookLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
 
-namespace StudentGradebookLibrary
+namespace StudentGradebookLibrary.Managers
 {
     // StudentManager class implements the IStudentManager interface
     public class StudentManager : IStudentManager
     {
-        private List<Student> Students;
+        private List<IStudent> Students;
 
         public StudentManager()
         {
-            Students = new List<Student>();
-
-            if (File.Exists("gradebook.json"))
-            {
-                string json = File.ReadAllText("gradebook.json");
-
-                Students = JsonSerializer.Deserialize<List<Student>>(json)
-                           ?? new List<Student>();
-            }
+            Students = new List<IStudent>();
         }
 
         // Implement Methods from IStudentManager interface below
@@ -46,12 +38,12 @@ namespace StudentGradebookLibrary
             Console.WriteLine("Student created successfully.");
         }
 
-        public Student Get(Guid studentId)
+        public IStudent Get(Guid studentId)
         {
             return Students.FirstOrDefault(s => s.StudentId == studentId);
         }
 
-        public List<Student> GetAll()
+        public List<IStudent> GetAll()
         {
             return Students;
         }
@@ -79,7 +71,7 @@ namespace StudentGradebookLibrary
             }
         }
 
-        public void Update(Student student)
+        public void Update(IStudent student)
         {
             // Validate input for safety
             if (student == null)
