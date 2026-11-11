@@ -1,19 +1,20 @@
+using StudentGradebookLibrary.Models;
 using System;
 using System.Collections.Generic;
 
-namespace StudentGradebookLibrary
+namespace StudentGradebookLibrary.Managers
 {
     // Interface for StudentManager class
     public interface IStudentManager
     {
         void Create(IStudent student);
 
-        Student Get(Guid studentId);
+        IStudent Get(Guid studentId);
 
-        List<Student> GetAll();
+        List<IStudent> GetAll();
 
         void Delete(Guid studentId);
 
-        void Update(Student student);
+        void Update(IStudent student);
     }
 }

@@ -1,6 +1,7 @@
+using StudentGradebookLibrary.Models;
 using System.Collections.Generic;
 
-namespace StudentGradebookLibrary
+namespace StudentGradebookLibrary.Repos
 {
     internal interface IRepo
     {

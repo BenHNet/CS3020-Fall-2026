@@ -1,10 +1,7 @@
-﻿using System;
+﻿using StudentGradebookLibrary.Models;
+using StudentGradebookLibrary.Repos;
+using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace StudentGradebookLibrary
 {
@@ -25,7 +22,7 @@ namespace StudentGradebookLibrary
                 return;
             }
 
-            this.Students.Add(new Student(name));
+            this.Students.Add(new Student() { LastName = name, StudentId = Guid.NewGuid() });
             Console.WriteLine("Student added successfully.");
         }
 
@@ -39,7 +36,7 @@ namespace StudentGradebookLibrary
                         
             for (int i = 0; i < this.Students.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {this.Students[i].Name}");
+                Console.WriteLine($"{i + 1}. {this.Students[i].LastName}");
             }
 
             Console.Write("Select a student:");
@@ -67,8 +64,7 @@ namespace StudentGradebookLibrary
                 return;
             }
 
-            student.AddGrade(subject, grade);
-            Console.WriteLine("Grade added successfully.");
+            Console.WriteLine("Gradind is not available at this time");
         }
 
         public void DisplayAll()
@@ -82,10 +78,6 @@ namespace StudentGradebookLibrary
             foreach (var student in this.Students)
             {
                 Console.WriteLine("\n" + student);
-                foreach (var mark in student.Marks)
-                {
-                    Console.WriteLine($"  - {mark.Subject}: {mark.Grade}");
-                }
             }
         }
 

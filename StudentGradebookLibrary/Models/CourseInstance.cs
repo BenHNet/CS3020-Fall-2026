@@ -1,6 +1,6 @@
 using System;
 
-namespace StudentGradebookLibrary.Courses
+namespace StudentGradebookLibrary.Models
 {
     internal class CourseInstance : ICourseInstance
     {

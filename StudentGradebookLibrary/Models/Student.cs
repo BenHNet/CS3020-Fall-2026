@@ -1,6 +1,6 @@
 using System;
 
-namespace StudentGradebookLibrary
+namespace StudentGradebookLibrary.Models
 {
     public class Student : IStudent
     {
