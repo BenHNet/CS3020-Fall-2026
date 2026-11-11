@@ -1,8 +1,9 @@
+using StudentGradebookLibrary.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
-namespace StudentGradebookLibrary
+namespace StudentGradebookLibrary.Repos
 {
     internal class JsonRepo : IRepo
     {
