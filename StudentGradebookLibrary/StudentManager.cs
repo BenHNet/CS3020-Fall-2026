@@ -79,9 +79,38 @@ namespace StudentGradebookLibrary
             }
         }
 
-        public void Update(Guid studentId)
+        public void Update(Student student)
         {
-            // Update implementation requires replacement student information.
+            // Validate input for safety
+            if (student == null)
+            {
+                return;
+            }
+
+            // Match student ID to find index
+            int replacementIndex = Students.FindIndex(
+                s => s.StudentId == student.StudentId
+            );
+
+            // If the student ID is found, update that entry
+            if (replacementIndex != -1)
+            {
+                Students[replacementIndex] = student;
+
+                // Write to JSON
+                string json = JsonSerializer.Serialize(
+                    Students,
+                    new JsonSerializerOptions { WriteIndented = true }
+                );
+
+                File.WriteAllText("gradebook.json", json);
+            }
+            else
+            {
+                Console.WriteLine("Student not found.");
+            }
+
+
         }
     }
 }

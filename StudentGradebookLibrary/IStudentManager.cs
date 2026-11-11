@@ -14,6 +14,6 @@ namespace StudentGradebookLibrary
 
         void Delete(Guid studentId);
 
-        void Update(Guid studentId);
+        void Update(Student student);
     }
 }
