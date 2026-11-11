@@ -11,6 +11,7 @@ namespace StudentGradebookLibrary
     public class GradebookManager
     {
         private List<Student> Students = new List<Student>();
+        private readonly IRepo _repo = new JsonRepo();
         private const string FilePath = "gradebook.json";
 
         public void AddStudent()
@@ -90,24 +91,12 @@ namespace StudentGradebookLibrary
 
         public void SaveData()
         {
-            var json = JsonSerializer.Serialize(this.Students, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(FilePath, json);
+            _repo.SaveStudents(this.Students);
         }
 
         public void LoadData()
         {
-            if (File.Exists(FilePath))
-            {
-                try
-                {
-                    var json = File.ReadAllText(FilePath);
-                    this.Students = JsonSerializer.Deserialize<List<Student>>(json) ?? new List<Student>();
-                }
-                catch
-                {
-                    this.Students = new List<Student>();
-                }
-            }
+            this.Students = _repo.GetStudents();
         }
     }
 }
