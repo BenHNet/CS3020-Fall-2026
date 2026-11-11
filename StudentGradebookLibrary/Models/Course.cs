@@ -1,7 +1,6 @@
 using System;
-using StudentGradebookLibrary.Courses;
 
-namespace StudentGradebookLibrary
+namespace StudentGradebookLibrary.Models
 {
     public class Course : ICourse
     {
