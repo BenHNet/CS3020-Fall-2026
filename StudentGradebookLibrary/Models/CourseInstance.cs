@@ -2,7 +2,7 @@ using System;
 
 namespace StudentGradebookLibrary.Models
 {
-    internal class CourseInstance : ICourseInstance
+    public class CourseInstance : ICourseInstance
     {
         public Guid CourseInstanceID { get; set; }
         public Guid CourseID { get; set; }
