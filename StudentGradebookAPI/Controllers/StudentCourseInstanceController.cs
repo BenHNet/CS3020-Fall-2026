@@ -39,5 +39,18 @@ namespace StudentGradebookAPI.Controllers
             _manager.SetGrade(request.StudentID, request.CourseInstanceID, request.Grade!.Value);
             return NoContent();
         }
+
+        // Unenroll a student from a course instance
+        [HttpDelete("{studentId}/{courseInstanceId}")]
+        public IActionResult Delete(Guid studentId, Guid courseInstanceId)
+        {
+            if (studentId == Guid.Empty || courseInstanceId == Guid.Empty)
+            {
+                return BadRequest("StudentID and CourseInstanceID are required.");
+            }
+
+            _manager.UnEnroll(studentId, courseInstanceId);
+            return NoContent();
+        }
     }
 }
