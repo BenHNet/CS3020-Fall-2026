@@ -77,5 +77,32 @@ namespace StudentGradebookAPI.Controllers
 
             return NoContent();
         }
+
+        //Get course instance enrollments for a specific student
+        [HttpGet("student/{studentID:guid}")]
+        public ActionResult<List<IStudentCourseInstance>> GetByStudent(Guid studentID)
+        {
+            if (studentID == Guid.Empty)
+            {
+                return BadRequest("StudentID is required.");
+            }
+
+            var enrollments = _manager.GetEnrollmentsForStudent(studentID);
+            return Ok(enrollments);
+        }
+
+        //Get student enrollments for a specific course instance
+        [HttpGet("course/{courseInstanceID:guid}")]
+        public ActionResult<List<IStudentCourseInstance>> GetByCourse(Guid courseInstanceID)
+        {
+            if (courseInstanceID == Guid.Empty)
+            {
+                return BadRequest("CourseInstanceID is required.");
+            }
+
+            var enrollments = _manager.GetEnrollmentsForCourse(courseInstanceID);
+            return Ok(enrollments);
+        }
+
     }
 }

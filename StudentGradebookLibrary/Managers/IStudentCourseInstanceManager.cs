@@ -1,5 +1,6 @@
 using StudentGradebookLibrary.Models;
 using System;
+using System.Collections.Generic;
 
 namespace StudentGradebookLibrary.Managers
 {
@@ -14,5 +15,11 @@ namespace StudentGradebookLibrary.Managers
 
         // Set the student's grade for a course instance
         void SetGrade(Guid studentID, Guid courseInstanceID, float grade);
+
+        // Return enrollment records for a specific course 
+        List<IStudentCourseInstance> GetEnrollmentsForCourse(Guid courseInstanceID);
+
+        //Return enrollment records for a specific student 
+        List<IStudentCourseInstance> GetEnrollmentsForStudent(Guid studentID);
     }
 }
