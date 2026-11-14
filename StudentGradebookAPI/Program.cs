@@ -1,10 +1,12 @@
+using StudentGradebookLibrary.Managers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
 
 // Singleton because the manager keeps enrollments in memory
-builder.Services.AddSingleton<StudentGradebookLibrary.Managers.IStudentCourseInstanceManager, StudentGradebookLibrary.Managers.StudentCourseInstanceManager>();
+builder.Services.AddSingleton<IStudentCourseInstanceManager, StudentCourseInstanceManager>();
 
 // NSwag: OpenAPI document + swagger UI
 builder.Services.AddOpenApiDocument(config =>

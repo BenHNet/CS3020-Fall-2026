@@ -16,7 +16,7 @@ namespace StudentGradebookAPI.Controllers
         }
 
         // Enroll a student in a course instance
-        [HttpPost(Name = "EnrollStudent")]
+        [HttpPost]
         public ActionResult<IStudentCourseInstance> Post([FromBody] EnrollStudentRequest request)
         {
             if (request.StudentID == Guid.Empty || request.CourseInstanceID == Guid.Empty)
@@ -28,7 +28,7 @@ namespace StudentGradebookAPI.Controllers
         }
 
         // Set a student's grade for a course instance
-        [HttpPut(Name = "SetStudentGrade")]
+        [HttpPut]
         public IActionResult Put([FromBody] SetGradeRequest request)
         {
             if (request.StudentID == Guid.Empty || request.CourseInstanceID == Guid.Empty)
