@@ -12,6 +12,7 @@ namespace StudentGradebookAPI
         public Guid CourseInstanceID { get; set; }
 
         [Required]
+        [Range(0.0, 100.0)]
         public float? Grade { get; set; }
     }
 }
