@@ -83,12 +83,30 @@ namespace StudentGradebookLibrary.Managers
             //_repo.Save(studentCourseInstance);
         }
 
+        public List<IStudentCourseInstance> GetEnrollmentsForCourse(Guid courseInstanceID)
+        {
+
+            return _studentCourseInstances.Where(
+                sci => sci.CourseInstanceID == courseInstanceID).ToList();
+
+        }
+
+        public List<IStudentCourseInstance> GetEnrollmentsForStudent(Guid studentID)
+        {
+
+            return _studentCourseInstances.Where(
+                sci => sci.StudentID == studentID).ToList();
+
+        }
+
         // Helper method to find a student course instance
         private IStudentCourseInstance? FindEnrollment(Guid studentID, Guid courseInstanceID)
         {
             return _studentCourseInstances.FirstOrDefault(
                 sci => sci.StudentID == studentID && sci.CourseInstanceID == courseInstanceID);
         }
+
+
         
     }
 }
