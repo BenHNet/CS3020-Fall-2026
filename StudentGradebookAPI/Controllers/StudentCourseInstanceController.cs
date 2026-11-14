@@ -26,5 +26,18 @@ namespace StudentGradebookAPI.Controllers
 
             return Ok(_manager.Enroll(request.StudentID, request.CourseInstanceID));
         }
+
+        // Set a student's grade for a course instance
+        [HttpPut(Name = "SetStudentGrade")]
+        public IActionResult Put([FromBody] SetGradeRequest request)
+        {
+            if (request.StudentID == Guid.Empty || request.CourseInstanceID == Guid.Empty)
+            {
+                return BadRequest("StudentID and CourseInstanceID are required.");
+            }
+
+            _manager.SetGrade(request.StudentID, request.CourseInstanceID, request.Grade!.Value);
+            return NoContent();
+        }
     }
 }
