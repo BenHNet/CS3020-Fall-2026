@@ -59,13 +59,13 @@ namespace StudentGradebookLibrary.Repos
         public void SaveStudents(List<Student> students) => SaveList(students, "students.json");
         public List<Student> GetStudents() => LoadList<Student>("students.json");
 
-        // public void SaveCourses(List<Course> courses) => SaveList(courses, "courses.json");
-        // public List<Course> GetCourses() => LoadList<Course>("courses.json");
+         public void SaveCourses(List<Course> courses) => SaveList(courses, "courses.json");
+         public List<Course> GetCourses() => LoadList<Course>("courses.json");
 
-        // public void SaveCourseInstances(List<CourseInstance> courseInstances) => SaveList(courseInstances, "courseInstances.json");
-        // public List<CourseInstance> GetCourseInstances() => LoadList<CourseInstance>("courseInstances.json");
+         public void SaveCourseInstances(List<CourseInstance> courseInstances) => SaveList(courseInstances, "courseInstances.json");
+         public List<CourseInstance> GetCourseInstances() => LoadList<CourseInstance>("courseInstances.json");
         
-        // public void SaveStudentCourseInstances(List<StudentCourseInstance> studentCourseInstances) => SaveList(studentCourseInstances, "studentCourseInstances.json");
-        // public List<StudentCourseInstance> GetStudentCourseInstances() => LoadList<StudentCourseInstance>("studentCourseInstances.json");
+         public void SaveStudentCourseInstances(List<StudentCourseInstance> studentCourseInstances) => SaveList(studentCourseInstances, "studentCourseInstances.json");
+         public List<StudentCourseInstance> GetStudentCourseInstances() => LoadList<StudentCourseInstance>("studentCourseInstances.json");
     }
 }

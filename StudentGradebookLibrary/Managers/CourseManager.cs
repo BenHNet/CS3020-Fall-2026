@@ -1,11 +1,18 @@
 ﻿using StudentGradebookLibrary.Models;
+using StudentGradebookLibrary.Repos;
 using System;
 using System.Collections.Generic;
 
 namespace StudentGradebookLibrary.Managers
 {
-    public class CourseManager
+    public class CourseManager : ICourseManager
     {
+        private IRepo _repo;
+
+        public CourseManager(IRepo repo)
+        {
+            _repo = repo;
+        }
         public List<Course> Courses = new List<Course>();
 
         public void Create()
@@ -73,5 +80,6 @@ namespace StudentGradebookLibrary.Managers
             }
             this.Courses.RemoveAt(index - 1);
         }
+        
     }
 }

@@ -8,13 +8,19 @@ namespace StudentGradebookLibrary.Repos
         void SaveStudents(List<Student> students);
         List<Student> GetStudents();
 
-        //void SaveCourses(List<Course> courses);
-        //List<Course> GetCourses();
+        void SaveCourses(List<Course> courses);
+        List<Course> GetCourses();
 
-        //void SaveCourseInstances(List<CourseInstance> courseInstances);
-        //List<CourseInstance> GetCourseInstances();
+        void SaveCourseInstances(List<CourseInstance> courseInstances);
+        List<CourseInstance> GetCourseInstances();
 
-        //void SaveStudentCourseInstances(List<StudentCourseInstance> studentCourseInstances);
-        //List<StudentCourseInstance> GetStudentCourseInstances();
+        void SaveStudentCourseInstances(List<StudentCourseInstance> studentCourseInstances);
+        List<StudentCourseInstance> GetStudentCourseInstances();
+
+        SaveCourseInformation SaveCourseInformation(Course course);
+
+        getCourseInformation GetCourseInformation(Guid courseId);
+
+     
     }
 }
