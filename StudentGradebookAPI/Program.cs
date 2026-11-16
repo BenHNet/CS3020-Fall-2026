@@ -1,3 +1,5 @@
+using StudentGradebookLibrary.Repos;
+// using StudentGradebookLibrary.Managers;
 using Serilog;
 
 using StudentGradebookLibrary;
@@ -8,6 +10,18 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddScoped<IStudentManager, StudentManager>();
+
+// One shared JsonRepo for the whole app
+builder.Services.AddSingleton<IRepo>(new JsonRepo());
+
+// Once StudentManager takes IRepo in its constructor
+// builder.Services.AddSingleton<IStudentManager, StudentManager>();
+
+// Once CourseManager takes IRepo in its constructor (no ICourseManager interface yet)
+// builder.Services.AddSingleton<CourseManager>();
+
+// Once CourseInstanceManager is made public and takes IRepo
+// builder.Services.AddSingleton<CourseInstanceManager>();
 
 // NSwag: OpenAPI document + swagger UI
 builder.Services.AddOpenApiDocument(config =>
