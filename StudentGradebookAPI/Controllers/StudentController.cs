@@ -21,5 +21,12 @@ namespace StudentGradebookAPI.Controllers
         {
             return Ok(_studentManager.GetAll());
         }
+
+        [HttpDelete("{studentId}")]
+        public ActionResult Delete(Guid studentId)
+        {
+            _studentManager.Delete(studentId);
+            return NoContent();
+        }
     }
 }
