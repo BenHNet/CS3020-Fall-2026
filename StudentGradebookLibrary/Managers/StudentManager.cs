@@ -1,9 +1,8 @@
 using StudentGradebookLibrary.Models;
+using StudentGradebookLibrary.Repos;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text.Json;
 
 namespace StudentGradebookLibrary.Managers
 {
@@ -12,9 +11,16 @@ namespace StudentGradebookLibrary.Managers
     {
         private List<IStudent> Students;
 
+        // Repo used to save and load student data
+        private IRepo _repo;
+
         public StudentManager()
         {
-            Students = new List<IStudent>();
+            // Use a JsonRepo by default
+            _repo = new JsonRepo();
+
+            // Load any students that were already saved
+            Students = new List<IStudent>(_repo.GetStudents());
         }
 
         // Implement Methods from IStudentManager interface below
@@ -27,13 +33,7 @@ namespace StudentGradebookLibrary.Managers
             }
 
             Students.Add(student);
-
-            string json = JsonSerializer.Serialize(
-                Students,
-                new JsonSerializerOptions { WriteIndented = true }
-            );
-
-            File.WriteAllText("gradebook.json", json);
+            Save();
 
             Console.WriteLine("Student created successfully.");
         }
@@ -57,13 +57,7 @@ namespace StudentGradebookLibrary.Managers
             if (replacementIndex != -1)
             {
                 Students.RemoveAt(replacementIndex);
-
-                string json = JsonSerializer.Serialize(
-                    Students,
-                    new JsonSerializerOptions { WriteIndented = true }
-                );
-
-                File.WriteAllText("gradebook.json", json);
+                Save();
             }
             else
             {
@@ -88,21 +82,18 @@ namespace StudentGradebookLibrary.Managers
             if (replacementIndex != -1)
             {
                 Students[replacementIndex] = student;
-
-                // Write to JSON
-                string json = JsonSerializer.Serialize(
-                    Students,
-                    new JsonSerializerOptions { WriteIndented = true }
-                );
-
-                File.WriteAllText("gradebook.json", json);
+                Save();
             }
             else
             {
                 Console.WriteLine("Student not found.");
             }
+        }
 
-
+        // Saves the current list of students using the repo
+        private void Save()
+        {
+            _repo.SaveStudents(Students.Cast<Student>().ToList());
         }
     }
 }
