@@ -21,5 +21,18 @@ namespace StudentGradebookAPI.Controllers
         {
             return Ok(_studentManager.GetAll());
         }
+
+        [HttpGet("{id:guid}")]
+        public ActionResult<IStudent> GetById(Guid id)
+        {
+            IStudent student = _studentManager.Get(id);
+
+            if (student == null)
+            {
+                return NotFound("Student not found.");
+            }
+
+            return Ok(student);
+        }
     }
 }
