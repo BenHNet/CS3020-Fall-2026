@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace StudentGradebookLibrary.Repos
 {
-    internal interface IRepo
+    public interface IRepo
     {
         void SaveStudents(List<Student> students);
         List<Student> GetStudents();
