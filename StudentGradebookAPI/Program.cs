@@ -1,14 +1,18 @@
+
+using StudentGradebookLibrary;
+using StudentGradebookLibrary.Managers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddScoped<IStudentManager, StudentManager>();
 
 // NSwag: OpenAPI document + swagger UI
 builder.Services.AddOpenApiDocument(config =>
 {
     config.Title = "Student Gradebook API";
     config.Version = "v1";
-
 });
 
 var app = builder.Build();
