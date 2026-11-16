@@ -37,8 +37,15 @@ namespace StudentGradebookLibrary.Managers
                 return;
             }
 
-            this.Courses.Add(new Course(Guid.NewGuid(), courseName, desc));
+            Create(courseName, desc);
             Console.WriteLine("Course added successfully.\n");
+        }
+
+        public Course Create(string title, string description)
+        {
+            var course = new Course(Guid.NewGuid(), title, description);
+            this.Courses.Add(course);
+            return course;
         }
 
         public List<Course> GetList()
@@ -62,6 +69,12 @@ namespace StudentGradebookLibrary.Managers
 
             course.Title = title;
             course.Description = description;
+        }
+
+        public bool Delete(Guid courseID)
+        {
+            var course = Get(courseID);
+            return course != null && this.Courses.Remove(course);
         }
 
         public void Delete(int index)
