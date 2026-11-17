@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddSingleton<ICourseInstanceManager, CourseInstanceManager>();
+builder.Services.AddSingleton<ICourseManager, CourseManager>();
 
 // NSwag: OpenAPI document + swagger UI
 builder.Services.AddOpenApiDocument(config =>

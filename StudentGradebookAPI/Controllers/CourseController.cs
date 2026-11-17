@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StudentGradebookLibrary.Managers;
 using StudentGradebookLibrary.Models;
 using System.Collections.Generic;
 
@@ -8,12 +9,17 @@ namespace StudentGradebookAPI.Controllers
     [Route("[controller]")]
     public class CourseController : ControllerBase
     {
-        private static readonly List<Course> courses = new List<Course>();
+        private readonly ICourseManager _manager;
+
+        public CourseController(ICourseManager manager)
+        {
+            _manager = manager;
+        }
 
         [HttpGet]
         public ActionResult<IEnumerable<Course>> Get()
         {
-            return Ok(courses);
+            return Ok(_manager.GetList());
         }
     }
 }

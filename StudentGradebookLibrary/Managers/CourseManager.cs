@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace StudentGradebookLibrary.Managers
 {
-    public class CourseManager
+    public class CourseManager : ICourseManager
     {
         public List<Course> Courses = new List<Course>();
 
