@@ -10,12 +10,11 @@ namespace StudentGradebookAPI.Controllers
     [Route("[controller]")]
     public class CourseInstanceController : ControllerBase
     {
-        private static readonly List<CourseInstance> courseInstances =
-            new List<CourseInstance>();
 
-        private readonly CourseInstanceManager _manager;
 
-        public CourseInstanceController(CourseInstanceManager manager)
+        private readonly ICourseInstanceManager _manager;
+
+        public CourseInstanceController(ICourseInstanceManager manager)
         {
             _manager = manager;
         }
@@ -23,7 +22,7 @@ namespace StudentGradebookAPI.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<CourseInstance>> Get()
         {
-            return Ok(courseInstances);
+            return Ok(_manager.GetList());
         }
 
         // Find a course instance using the ID from the URL.
