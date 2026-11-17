@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace StudentGradebookAPI
+namespace StudentGradebookLibrary.Models
 {
     // Request payload for setting a student's grade in a course instance
     public class SetGradeRequest

@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace StudentGradebookAPI
+namespace StudentGradebookLibrary.Models
 {
     // Request payload for enrolling a student in a course instance
     public class EnrollStudentRequest
