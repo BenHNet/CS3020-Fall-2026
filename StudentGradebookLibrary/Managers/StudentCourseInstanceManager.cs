@@ -27,9 +27,8 @@ namespace StudentGradebookLibrary.Managers
             var existingEnrollment = FindEnrollment(studentID, courseInstanceID);
             if (existingEnrollment != null)
             {
-                System.Console.WriteLine(
+                throw new ArgumentException(
                     $"Student {studentID} is already enrolled in course instance {courseInstanceID}.");
-                return existingEnrollment;
             }
 
             // Create a new student course instance
@@ -54,11 +53,13 @@ namespace StudentGradebookLibrary.Managers
         {
             // Find the student course instance
             var studentCourseInstance = FindEnrollment(studentID, courseInstanceID);
-            if (studentCourseInstance != null)
+            if (studentCourseInstance == null)
             {
-                // Set the grade for the student's course instance
-                studentCourseInstance.Grade = grade;
+                throw new ArgumentException(
+                    $"Student {studentID} is not enrolled in course instance {courseInstanceID}.");
             }
+
+            studentCourseInstance.Grade = grade;
 
             // Serialize the data - right now IRepo does not serialize student course instances.
             // Enable this when ready
@@ -72,11 +73,13 @@ namespace StudentGradebookLibrary.Managers
 
             // Find the student's course instance
             var studentCourseInstance = FindEnrollment(studentID, courseInstanceID);
-            if (studentCourseInstance != null)
+            if (studentCourseInstance == null)
             {
-                // Remove the student's course instance
-                this._studentCourseInstances.Remove(studentCourseInstance);
+                throw new ArgumentException(
+                    $"Student {studentID} is not enrolled in course instance {courseInstanceID}.");
             }
+
+            _studentCourseInstances.Remove(studentCourseInstance);
 
             // Serialize the data - right now IRepo does not serialize student course instances.
             // Enable this when ready
