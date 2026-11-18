@@ -8,10 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 // Singleton because the managers can be reused by all the different controller
+builder.Services.AddSingleton<IRepo, JsonRepo>();
 builder.Services.AddSingleton<ICourseInstanceManager, CourseInstanceManager>();
-builder.Services.AddSingleton<ICourseManager, CourseManager>();
+builder.Services.AddSingleton<ICourseManager, CourseManager>(provider => new CourseManager(provider.GetRequiredService<IRepo>()));
 builder.Services.AddSingleton<IStudentManager, StudentManager>();
-builder.Services.AddSingleton<IRepo>(new JsonRepo());
 builder.Services.AddSingleton<IStudentCourseInstanceManager, StudentCourseInstanceManager>();
 
 // NSwag: OpenAPI document + swagger UI

@@ -1,4 +1,5 @@
 ﻿using StudentGradebookLibrary.Models;
+using StudentGradebookLibrary.Repos;
 using System;
 using System.Collections.Generic;
 
@@ -7,6 +8,13 @@ namespace StudentGradebookLibrary.Managers
     public class CourseManager : ICourseManager
     {
         public List<Course> Courses = new List<Course>();
+        public IRepo _repo;
+
+        public CourseManager (IRepo repo)
+        {
+            _repo = repo;
+        }
+
 
         public void Create()
         {
