@@ -27,7 +27,7 @@ namespace StudentGradebookLibrary.Managers
             var existingEnrollment = FindEnrollment(studentID, courseInstanceID);
             if (existingEnrollment != null)
             {
-                throw new ArgumentException(
+                throw new InvalidOperationException(
                     $"Student {studentID} is already enrolled in course instance {courseInstanceID}.");
             }
 
@@ -55,7 +55,7 @@ namespace StudentGradebookLibrary.Managers
             var studentCourseInstance = FindEnrollment(studentID, courseInstanceID);
             if (studentCourseInstance == null)
             {
-                throw new ArgumentException(
+                throw new InvalidOperationException(
                     $"Student {studentID} is not enrolled in course instance {courseInstanceID}.");
             }
 
@@ -75,7 +75,7 @@ namespace StudentGradebookLibrary.Managers
             var studentCourseInstance = FindEnrollment(studentID, courseInstanceID);
             if (studentCourseInstance == null)
             {
-                throw new ArgumentException(
+                throw new InvalidOperationException(
                     $"Student {studentID} is not enrolled in course instance {courseInstanceID}.");
             }
 

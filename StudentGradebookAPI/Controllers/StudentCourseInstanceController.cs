@@ -29,9 +29,9 @@ namespace StudentGradebookAPI.Controllers
                 var enrollment = _manager.Enroll(request.StudentID, request.CourseInstanceID);
                 return StatusCode(StatusCodes.Status201Created, enrollment);
             }
-            catch (ArgumentException ex)
+            catch (InvalidOperationException ex)
             {
-                return BadRequest(ex.Message);
+                return Conflict(ex.Message);
             }
         }
 
@@ -49,7 +49,7 @@ namespace StudentGradebookAPI.Controllers
                 // Grade is non-null here: [ApiController] returns 400 before this runs if [Required] fails
                 _manager.SetGrade(request.StudentID, request.CourseInstanceID, request.Grade!.Value);
             }
-            catch (ArgumentException ex)
+            catch (InvalidOperationException ex)
             {
                 return NotFound(ex.Message);
             }
@@ -70,7 +70,7 @@ namespace StudentGradebookAPI.Controllers
             {
                 _manager.UnEnroll(studentId, courseInstanceId);
             }
-            catch (ArgumentException ex)
+            catch (InvalidOperationException ex)
             {
                 return NotFound(ex.Message);
             }
