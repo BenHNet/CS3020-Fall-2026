@@ -9,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddSingleton<ICourseInstanceManager, CourseInstanceManager>();
+builder.Services.AddSingleton<ICourseManager, CourseManager>();
 builder.Services.AddScoped<IStudentManager, StudentManager>();
 
 // One shared JsonRepo for the whole app
