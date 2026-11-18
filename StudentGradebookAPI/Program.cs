@@ -6,23 +6,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
+
+// Singleton because the managers can be reused by all the different controller
+builder.Services.AddSingleton<IRepo, JsonRepo>();
 builder.Services.AddSingleton<ICourseInstanceManager, CourseInstanceManager>();
-builder.Services.AddSingleton<ICourseManager, CourseManager>();
-builder.Services.AddScoped<IStudentManager, StudentManager>();
-
-// One shared JsonRepo for the whole app
-builder.Services.AddSingleton<IRepo>(new JsonRepo());
-
-// Once StudentManager takes IRepo in its constructor
-// builder.Services.AddSingleton<IStudentManager, StudentManager>();
-
-// Once CourseManager takes IRepo in its constructor (no ICourseManager interface yet)
-// builder.Services.AddSingleton<CourseManager>();
-
-// Once CourseInstanceManager is made public and takes IRepo
-// builder.Services.AddSingleton<CourseInstanceManager>();
-
-// Singleton because the manager keeps enrollments in memory
+builder.Services.AddSingleton<ICourseManager, CourseManager>(provider => new CourseManager(provider.GetRequiredService<IRepo>()));
+builder.Services.AddSingleton<IStudentManager, StudentManager>();
 builder.Services.AddSingleton<IStudentCourseInstanceManager, StudentCourseInstanceManager>();
 
 // NSwag: OpenAPI document + swagger UI
