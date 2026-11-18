@@ -1,8 +1,5 @@
-using StudentGradebookLibrary.Repos;
-// using StudentGradebookLibrary.Managers;
 using Serilog;
-
-using StudentGradebookLibrary;
+using StudentGradebookLibrary.Repos;
 using StudentGradebookLibrary.Managers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +21,9 @@ builder.Services.AddSingleton<IRepo>(new JsonRepo());
 
 // Once CourseInstanceManager is made public and takes IRepo
 // builder.Services.AddSingleton<CourseInstanceManager>();
+
+// Singleton because the manager keeps enrollments in memory
+builder.Services.AddSingleton<IStudentCourseInstanceManager, StudentCourseInstanceManager>();
 
 // NSwag: OpenAPI document + swagger UI
 builder.Services.AddOpenApiDocument(config =>
