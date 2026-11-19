@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "StudentGradebookAPI\\StudentGradebookAPI.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      },
+      {
+        "Path": "StudentGradebookAngular\\StudentGradebookAngular.esproj",
+        "Action": "Start",
+        "DebugTarget": "localhost (Edge)"
+      }
+    ]
+  }
+]
