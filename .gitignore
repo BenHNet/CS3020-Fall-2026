@@ -9,4 +9,6 @@
 /StudentGradebookLibrary/obj
 /StudentGradebookAPI/bin
 /StudentGradebookAPI/obj
+/StudentGradebookAPI/Logs/
 /StudentGradebookAPI/StudentGradebookAPI.csproj.user
+/StudentGradeBookAngular/obj/Debug

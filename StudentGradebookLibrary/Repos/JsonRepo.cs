@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace StudentGradebookLibrary.Repos
 {
-    internal class JsonRepo : IRepo
+    public class JsonRepo : IRepo
     {
         private readonly string _folder;
         private static readonly JsonSerializerOptions _options =
@@ -16,7 +16,7 @@ namespace StudentGradebookLibrary.Repos
             _folder = folder;
 
             // Create the folder if it doesn't already exist
-            Directory.CreateDirectory(_folder);   
+            Directory.CreateDirectory(_folder);
         }
 
 
@@ -37,7 +37,7 @@ namespace StudentGradebookLibrary.Repos
             if (!File.Exists(path))
             {
                 // nothing saved yet resulting in an empty list
-                return new List<T>();             
+                return new List<T>();
             }
 
             string json = File.ReadAllText(path);
@@ -50,22 +50,21 @@ namespace StudentGradebookLibrary.Repos
             // return an empty list instead of crashing
             catch (JsonException)
             {
-                return new List<T>();       
+                return new List<T>();
             }
         }
-
 
 
         public void SaveStudents(List<Student> students) => SaveList(students, "students.json");
         public List<Student> GetStudents() => LoadList<Student>("students.json");
 
-        // public void SaveCourses(List<Course> courses) => SaveList(courses, "courses.json");
-        // public List<Course> GetCourses() => LoadList<Course>("courses.json");
+        public void SaveCourses(List<Course> courses) => SaveList(courses, "courses.json");
+        public List<Course> GetCourses() => LoadList<Course>("courses.json");
 
-        // public void SaveCourseInstances(List<CourseInstance> courseInstances) => SaveList(courseInstances, "courseInstances.json");
-        // public List<CourseInstance> GetCourseInstances() => LoadList<CourseInstance>("courseInstances.json");
-        
-        // public void SaveStudentCourseInstances(List<StudentCourseInstance> studentCourseInstances) => SaveList(studentCourseInstances, "studentCourseInstances.json");
-        // public List<StudentCourseInstance> GetStudentCourseInstances() => LoadList<StudentCourseInstance>("studentCourseInstances.json");
+        public void SaveCourseInstances(List<CourseInstance> courseInstances) => SaveList(courseInstances, "courseInstances.json");
+        public List<CourseInstance> GetCourseInstances() => LoadList<CourseInstance>("courseInstances.json");
+
+        public void SaveStudentCourseInstances(List<StudentCourseInstance> studentCourseInstances) => SaveList(studentCourseInstances, "studentCourseInstances.json");
+        public List<StudentCourseInstance> GetStudentCourseInstances() => LoadList<StudentCourseInstance>("studentCourseInstances.json");
     }
 }
