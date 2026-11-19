@@ -1,6 +1,6 @@
 ﻿namespace StudentGradebookLibrary.Models
 {
-    internal enum  Semester
+    public enum  Semester
     {
         Spring,
         Summer,

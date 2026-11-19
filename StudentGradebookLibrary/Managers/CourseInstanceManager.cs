@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace StudentGradebookLibrary.Managers
 {
-    internal class CourseInstanceManager
+    public class CourseInstanceManager : ICourseInstanceManager
     {
         private readonly List<CourseInstance> _courseInstances = new();
 
