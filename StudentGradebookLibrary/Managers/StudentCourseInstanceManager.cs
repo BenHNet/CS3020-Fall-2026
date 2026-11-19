@@ -1,0 +1,115 @@
+#nullable enable
+
+using StudentGradebookLibrary.Models;
+using StudentGradebookLibrary.Repos;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace StudentGradebookLibrary.Managers
+{
+    public class StudentCourseInstanceManager : IStudentCourseInstanceManager
+    {
+        private readonly List<IStudentCourseInstance> _studentCourseInstances = new();
+        
+        // Enable serialization when ready - right now IRepo is internal, while the manager classes are public.
+        // private readonly IRepo _repo;
+
+        // public StudentCourseInstanceManager(IRepo repo)
+        // {
+        //    _repo = repo;
+        // }
+        
+
+        public IStudentCourseInstance Enroll(Guid studentID, Guid courseInstanceID)
+        {
+            // Check for duplicate enrollment
+            var existingEnrollment = FindEnrollment(studentID, courseInstanceID);
+            if (existingEnrollment != null)
+            {
+                throw new InvalidOperationException(
+                    $"Student {studentID} is already enrolled in course instance {courseInstanceID}.");
+            }
+
+            // Create a new student course instance
+            var studentCourseInstance = new StudentCourseInstance(Guid.NewGuid(), studentID, courseInstanceID);
+
+            // If the interface does not require an ID, use the constructor without one.
+            //var studentCourseInstance = new StudentCourseInstance(studentID, courseInstanceID);
+
+            _studentCourseInstances.Add(studentCourseInstance);
+
+            // Serialize the data
+            // Enable this when ready - right now IRepo does not serialize student course instances.
+            //_repo.Save(studentCourseInstance);
+
+            // Return the newly created student course instance
+            return studentCourseInstance;
+        }
+
+        
+
+        public void SetGrade(Guid studentID, Guid courseInstanceID, float grade)
+        {
+            // Find the student course instance
+            var studentCourseInstance = FindEnrollment(studentID, courseInstanceID);
+            if (studentCourseInstance == null)
+            {
+                throw new InvalidOperationException(
+                    $"Student {studentID} is not enrolled in course instance {courseInstanceID}.");
+            }
+
+            studentCourseInstance.Grade = grade;
+
+            // Serialize the data - right now IRepo does not serialize student course instances.
+            // Enable this when ready
+            //_repo.Save(studentCourseInstance);
+        }
+
+        public void UnEnroll(Guid studentID, Guid courseInstanceID)
+        {
+            // Should we be removing the student course instance or just clearing its grade?
+            // Having a way to tell if a student has unenrolled from a course would be useful.
+
+            // Find the student's course instance
+            var studentCourseInstance = FindEnrollment(studentID, courseInstanceID);
+            if (studentCourseInstance == null)
+            {
+                throw new InvalidOperationException(
+                    $"Student {studentID} is not enrolled in course instance {courseInstanceID}.");
+            }
+
+            _studentCourseInstances.Remove(studentCourseInstance);
+
+            // Serialize the data - right now IRepo does not serialize student course instances.
+            // Enable this when ready
+            //_repo.Save(studentCourseInstance);
+        }
+
+        public List<IStudentCourseInstance> GetEnrollmentsForCourse(Guid courseInstanceID)
+        {
+
+            return _studentCourseInstances.Where(
+                sci => sci.CourseInstanceID == courseInstanceID).ToList();
+
+        }
+
+        public List<IStudentCourseInstance> GetEnrollmentsForStudent(Guid studentID)
+        {
+
+            return _studentCourseInstances.Where(
+                sci => sci.StudentID == studentID).ToList();
+
+        }
+
+        // Helper method to find a student course instance
+        private IStudentCourseInstance? FindEnrollment(Guid studentID, Guid courseInstanceID)
+        {
+            return _studentCourseInstances.FirstOrDefault(
+                sci => sci.StudentID == studentID && sci.CourseInstanceID == courseInstanceID);
+        }
+
+
+        
+    }
+}
